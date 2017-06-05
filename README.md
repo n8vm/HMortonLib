@@ -1,8 +1,9 @@
-# MortonLib
+# HMortonLib
 
-Java library to encode/decode Morton codes (Z-order curve). The library maps 2D/3D data to one dimension. This encoding can be used to store the data in various data structures (hash tables, B-trees, ..). The Z-ordering is often used to build quadtrees of point sets. 
+Java library to encode/decode Hierarchical Morton codes (HZ-order curve). The library maps 2D/3D data to one dimension either uniformly or hierarchically. This encoding can be used to store the data in various data structures (hash tables, B-trees, ..). The Z-ordering is often used to build quadtrees of point sets. 
 
 More information: [Z-order curve](https://en.wikipedia.org/wiki/Z-order_curve)
+More about HZ-order: [HZ-order curve](http://www.pascucci.org/pdf-papers/chapter-thaoe.pdf)
 
 # Usage
 
