@@ -1,4 +1,4 @@
-package com.erenck.mortonlib;
+package gov.inl.SIEVAS.hmortonlib;
 
 /**
  * Encode/decode 2D coordinates to Morton codes (Z-order curve)

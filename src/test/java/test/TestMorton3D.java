@@ -1,7 +1,7 @@
 package test;
 
 import junit.framework.*;
-import com.erenck.mortonlib.Morton3D;
+import gov.inl.SIEVAS.hmortonlib.Morton3D;
 import java.util.Arrays;
 
 /**

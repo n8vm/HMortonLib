@@ -1,7 +1,8 @@
 package test;
 
+import gov.inl.SIEVAS.hmortonlib.HMorton2D;
 import junit.framework.*;
-import com.erenck.mortonlib.Morton2D;
+import gov.inl.SIEVAS.hmortonlib.Morton2D;
 import java.util.Arrays;
 
 /**
@@ -12,10 +13,12 @@ import java.util.Arrays;
 public class TestMorton2D extends TestCase {
 
     protected Morton2D mortonTest;
+    protected HMorton2D hmortonTest;
 
     // assigning the values
     protected void setUp() {
         mortonTest = new Morton2D();
+        hmortonTest = new HMorton2D(2);
     }
 
     public void testEncode() {
@@ -141,4 +144,59 @@ public class TestMorton2D extends TestCase {
         assertTrue(Arrays.equals(mortonTest.decode(71469665121464L), new int[]{9494756, 78}));
     }
 
+    public void testHierarchicalEncode () {
+        // 0
+        assertTrue(hmortonTest.encode(0, 0) == 0);
+
+        // 1
+        assertTrue(hmortonTest.encode(0, 2) == 1);
+
+        //2
+        assertTrue(hmortonTest.encode(2, 0) == 2);
+        assertTrue(hmortonTest.encode(2,2) == 3);
+
+        //3
+        assertTrue(hmortonTest.encode(0, 1) == 4);
+        assertTrue(hmortonTest.encode(2, 1) == 5);
+        assertTrue(hmortonTest.encode(0, 3) == 6);
+        assertTrue(hmortonTest.encode(2, 3) == 7);
+
+        //4
+        assertTrue(hmortonTest.encode(1, 0) == 8);
+        assertTrue(hmortonTest.encode(1,1) == 9);
+        assertTrue(hmortonTest.encode(3, 0) == 10);
+        assertTrue(hmortonTest.encode(3, 1) == 11);
+        assertTrue(hmortonTest.encode(1, 2) == 12);
+        assertTrue(hmortonTest.encode(1, 3) == 13);
+        assertTrue(hmortonTest.encode(3, 2) == 14);
+        assertTrue(hmortonTest.encode(3, 3) == 15);
+    }
+
+    public void testHierarchicalDecode () {
+        // 0
+        assertTrue(Arrays.equals(hmortonTest.decode(0), new int[]{0, 0}));
+
+        // 1
+        assertTrue(Arrays.equals(hmortonTest.decode(1), new int[]{0, 2}));
+
+        //2
+        assertTrue(Arrays.equals(hmortonTest.decode(2), new int[]{2, 0}));
+        assertTrue(Arrays.equals(hmortonTest.decode(3), new int[]{2, 2}));
+
+        //3
+        assertTrue(Arrays.equals(hmortonTest.decode(4), new int[]{0, 1}));
+        assertTrue(Arrays.equals(hmortonTest.decode(5), new int[]{2, 1}));
+        assertTrue(Arrays.equals(hmortonTest.decode(6), new int[]{0, 3}));
+        assertTrue(Arrays.equals(hmortonTest.decode(7), new int[]{2, 3}));
+
+        //4
+        assertTrue(Arrays.equals(hmortonTest.decode(8), new int[]{1, 0}));
+        assertTrue(Arrays.equals(hmortonTest.decode(9), new int[]{1, 1}));
+        assertTrue(Arrays.equals(hmortonTest.decode(10), new int[]{3, 0}));
+        assertTrue(Arrays.equals(hmortonTest.decode(11), new int[]{3, 1}));
+        assertTrue(Arrays.equals(hmortonTest.decode(12), new int[]{1, 2}));
+        assertTrue(Arrays.equals(hmortonTest.decode(13), new int[]{1, 3}));
+        assertTrue(Arrays.equals(hmortonTest.decode(14), new int[]{3, 2}));
+        assertTrue(Arrays.equals(hmortonTest.decode(15), new int[]{3, 3}));
+    }
 }
